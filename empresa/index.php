@@ -17,8 +17,6 @@
                     <hr class="my-4">
                     <p>Acesse as funções.</p>
                     <a class="class btn btn-primary btn-lg" href="cadastro.php" role="button">Cadastro</a>
-                    
-
                 </div>
         </div>
     </div>
