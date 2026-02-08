@@ -1,6 +1,6 @@
 <?php
 $pesquisa = $_POST['busca'] ?? '';
-include "conexao.php";
+include "includes/conexao.php";;
 $sql = "SELECT * from pessoas WHERE nome LIKE '%$pesquisa%'";
 $dados = mysqli_query($conn, $sql);
 ?>
@@ -55,7 +55,7 @@ $dados = mysqli_query($conn, $sql);
                                 <td>$email</td>
                                 <td>$data_nascimento</td>
                                 <td>
-                                    <a href='cadastro_edit.php?id=$cod_pessoa' class='btn btn-primary btn-sm'>Editar</a>
+                                    <a href='editar.php?id=$cod_pessoa' class='btn btn-primary btn-sm'>Editar</a>
                                     <a href='excluir.php?cod_pessoa=$cod_pessoa' class='btn btn-danger btn-sm'>Excluir</a>
 
                                 </tr>";
@@ -85,7 +85,7 @@ $dados = mysqli_query($conn, $sql);
             formData.append('busca', valor);
 
             // Chama o arquivo busca.php (que criamos antes)
-            fetch('busca.php', {
+            fetch('acoes/busca.php', {
                     method: 'POST',
                     body: formData
                 })

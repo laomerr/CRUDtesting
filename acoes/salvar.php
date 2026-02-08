@@ -1,5 +1,5 @@
 <?php
-include "conexao.php";
+include "../includes/conexao.php";
 
 $nome = $_POST["nome"];
 $endereco = $_POST["endereco"];
@@ -21,13 +21,13 @@ if (mysqli_query($conn, $sql)) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
 
 <body>
   <div class="container">
     <div class="row">
-      <a href="index.php" class="btn btn-primary">Voltar</a>
+      <a href="../index.php" class="btn btn-primary">Voltar</a>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

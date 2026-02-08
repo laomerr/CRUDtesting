@@ -1,5 +1,5 @@
 <?php
-include "conexao.php";
+include "../includes/conexao.php";
 
 $pesquisa = $_POST['busca'] ?? '';
 
@@ -19,15 +19,15 @@ while ($linha = mysqli_fetch_assoc($dados)) {
     }
 
     echo "<tr>
-            <th scope='row'>$nome</th>
-            <td>$endereco</td>
-            <td>$telefone</td>
-            <td>$email</td>
-            <td>$data_nascimento</td>
-            
-            <td>
-                <a href='cadastro_edit.php?id=$cod_pessoa' class='btn btn-primary btn-sm'>Editar</a>
-                <a href='excluir.php?cod_pessoa=$cod_pessoa' class='btn btn-danger btn-sm'>Excluir</a>
-            </td>
-          </tr>";
+        <th scope='row'>$nome</th>
+        <td>$endereco</td>
+        <td>$telefone</td>
+        <td>$email</td>
+        <td>$data_nascimento</td>
+        
+        <td>
+            <a href='editar.php?id=$cod_pessoa' class='btn btn-primary btn-sm'>Editar</a>
+            <a href='excluir.php?cod_pessoa=$cod_pessoa' class='btn btn-danger btn-sm'>Excluir</a>
+        </td>
+      </tr>";
 }

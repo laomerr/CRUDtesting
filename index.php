@@ -16,8 +16,8 @@
           <p class="lead">Sistema de cadastro. Base de estudos para criação de sistemas web com PHP e MySQL.</p>
           <hr class="my-4">
           <p>Acesse as funções.</p>
-          <a class="class btn btn-primary btn-lg" href="cadastro.php" role="button">Cadastro</a>
-          <a class="class btn btn-primary btn-lg" href="pesquisa.php" role="button">Pesquisar</a>
+          <a class="class btn btn-primary btn-lg" href="cadastrar.php" role="button">Cadastro</a>
+          <a class="class btn btn-primary btn-lg" href="pesquisar.php" role="button">Pesquisar</a>
         </div>
       </div>
     </div>
