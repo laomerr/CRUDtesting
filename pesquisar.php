@@ -49,15 +49,15 @@ $dados = mysqli_query($conn, $sql);
                             $data_nascimento = $linha['data_nascimento'];
                             $data_nascimento = mostra_data($data_nascimento);
                             echo "<tr>
-                                <th scope='row'>$nome</th>
-                                <td>$endereco</td>
-                                <td>$telefone</td>
-                                <td>$email</td>
-                                <td>$data_nascimento</td>
-                                <td>
-                                    <a href='editar.php?id=$cod_pessoa' class='btn btn-primary btn-sm'>Editar</a>
-                                    <a href='excluir.php?cod_pessoa=$cod_pessoa' class='btn btn-danger btn-sm'>Excluir</a>
-
+                                    <th scope='row'>$nome</th>
+                                    <td>$endereco</td>
+                                    <td>$telefone</td>
+                                    <td>$email</td>
+                                    <td>$data_nascimento</td>
+                                    <td>
+                                        <a href='editar.php?id=$cod_pessoa' class='btn btn-primary btn-sm'>Editar</a>
+                                        <a href='#' class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#exampleModal' onclick=" . '"' . "pegar_dados($cod_pessoa, '$nome')" . '"' . ">Excluir</a>
+                                    </td>
                                 </tr>";
                         };
                         ?>
@@ -67,6 +67,43 @@ $dados = mysqli_query($conn, $sql);
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmação de Exclusão</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="acoes/excluir.php" method="POST">
+                        <p>Deseja realmente excluir este registro?</p>
+                        <p id="nome_pessoa" style="font-weight: bold;">Nome da Pessoa</p>
+
+                        <input type="hidden" name="cod_pessoa" id="cod_pessoa_input" value="">
+
+                        <input type="hidden" name="nome" id="nome_pessoa_input" value="">
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                            <input type="submit" class="btn btn-danger" value="Sim">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function pegar_dados(id, nome) {
+            document.getElementById('nome_pessoa').innerHTML = nome;
+
+            document.getElementById('cod_pessoa_input').value = id;
+            document.getElementById('nome_pessoa_input').value = nome; // Adicione essa linha!
+        }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         var search = document.getElementById('busca');
