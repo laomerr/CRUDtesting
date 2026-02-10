@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col">
                 <h1>Cadastro</h1>
-                <form action="acoes/salvar.php" method="POST">
+                <form action="../controllers/salvar.php" method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome Completo</label>
                         <input type="text" class="form-control" name="nome" required>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="mb-3">
                         <input type="submit" class="btn btn-success">
-                        <a href="index.php" class="btn btn-primary">Voltar</a>
+                        <a href="../public/index.php" class="btn btn-primary">Voltar</a>
                     </div>
                 </form>
             </div>

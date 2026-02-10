@@ -1,8 +1,9 @@
 <?php
 $pesquisa = $_POST['busca'] ?? '';
-include "includes/conexao.php";;
-$sql = "SELECT * from pessoas WHERE nome LIKE '%$pesquisa%'";
-$dados = mysqli_query($conn, $sql);
+include "../config/conexao.php";
+include "../models/cliente.php";
+$cliente = new Cliente($conn);
+$dados = $cliente->pesquisar($pesquisa);
 ?>
 
 <!doctype html>
@@ -11,7 +12,8 @@ $dados = mysqli_query($conn, $sql);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <title>Pesquisar</title>
 </head>
 
 <body>
@@ -21,7 +23,7 @@ $dados = mysqli_query($conn, $sql);
                 <h1>Pesquisar</h1>
                 <nav class="navbar bg-body-tertiary">
                     <div class="container-fluid">
-                        <form class="d-flex" action="pesquisa.php" method="POST" role="search">
+                        <form class="d-flex" action="pesquisar.php" method="POST" role="search">
                             <input class="form-control me-2" type="search" placeholder="Nome" aria-label="Search" name="busca" id="busca" />
                             <button class="btn btn-outline-success" type="submit">Pesquisar</button>
                         </form>
@@ -40,14 +42,17 @@ $dados = mysqli_query($conn, $sql);
                     </thead>
                     <tbody id="resultado">
                         <?php
-                        while ($linha = mysqli_fetch_assoc($dados)) {
+                        foreach ($dados as $linha) {
                             $cod_pessoa = $linha['cod_pessoa'];
                             $nome = $linha['nome'];
                             $endereco = $linha['endereco'];
                             $telefone = $linha['telefone'];
                             $email = $linha['email'];
                             $data_nascimento = $linha['data_nascimento'];
-                            $data_nascimento = mostra_data($data_nascimento);
+
+                            if (function_exists('mostra_data')) {
+                                $data_nascimento = mostra_data($data_nascimento);
+                            }
                             echo "<tr>
                                     <th scope='row'>$nome</th>
                                     <td>$endereco</td>
@@ -63,7 +68,7 @@ $dados = mysqli_query($conn, $sql);
                         ?>
                     </tbody>
                 </table>
-                <a href="index.php" class="btn btn-primary">Voltar</a>
+                <a href="../public/index.php" class="btn btn-primary">Voltar</a>
             </div>
         </div>
     </div>
@@ -77,7 +82,7 @@ $dados = mysqli_query($conn, $sql);
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="acoes/excluir.php" method="POST">
+                    <form action="../controllers/excluir.php" method="POST">
                         <p>Deseja realmente excluir este registro?</p>
                         <p id="nome_pessoa" style="font-weight: bold;">Nome da Pessoa</p>
 
@@ -98,7 +103,6 @@ $dados = mysqli_query($conn, $sql);
     <script type="text/javascript">
         function pegar_dados(id, nome) {
             document.getElementById('nome_pessoa').innerHTML = nome;
-
             document.getElementById('cod_pessoa_input').value = id;
             document.getElementById('nome_pessoa_input').value = nome; // Adicione essa linha!
         }
@@ -108,29 +112,30 @@ $dados = mysqli_query($conn, $sql);
     <script>
         var search = document.getElementById('busca');
 
-        search.addEventListener("keydown", function(event) {
-            if (event.key === "Enter") {
-                searchData();
-            }
-        });
-
-        search.addEventListener("keyup", function() {
+        function realizarBusca() {
             var valor = search.value;
-
-            // Cria os dados para enviar como se fosse um formulário
             var formData = new FormData();
             formData.append('busca', valor);
 
-            // Chama o arquivo busca.php (que criamos antes)
-            fetch('acoes/busca.php', {
+            fetch('../controllers/busca.php', {
                     method: 'POST',
                     body: formData
                 })
                 .then(response => response.text())
                 .then(html => {
-                    // Joga o resultado dentro do corpo da tabela
                     document.getElementById('resultado').innerHTML = html;
                 });
+        }
+
+        search.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Evita o envio do formulário
+                realizarBusca(); // Chama a função para realizar a pesquisa
+            }
+        });
+
+        search.addEventListener("keyup", function() {
+            realizarBusca(); // Chama a função para realizar a pesquisa
         });
     </script>
 </body>
