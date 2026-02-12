@@ -16,7 +16,7 @@
     include "../models/cliente.php";
     $id = $_GET['id'] ?? '';
     $cliente = new Cliente($conn);
-    $linha = $cliente->buscarPorId($id);
+    $linha = $cliente->buscarPorId((int)$id);
     if (!$linha) {
         echo "<div class='container'><div class='alert alert-danger mt-3'>Registro não encontrado!</div></div>";
         echo "<meta http-equiv='refresh' content='2;url=../views/pesquisar.php'>";

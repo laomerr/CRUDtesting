@@ -8,6 +8,20 @@
 </head>
 
 <body>
+  <?php
+// Captura a mensagem da URL
+$msg = $_GET['msg'] ?? null;
+
+if ($msg == 'sucesso_cadastro') {
+    echo '<div class="alert alert-success">Cliente cadastrado com sucesso!</div>';
+} elseif ($msg == 'sucesso_atualizar') {
+    echo '<div class="alert alert-primary">Dados atualizados com sucesso!</div>';
+} elseif ($msg == 'sucesso_excluir') {
+    echo '<div class="alert alert-warning">Cliente excluído!</div>';
+} elseif (strpos($msg, 'erro') !== false) {
+    echo '<div class="alert alert-danger">Ocorreu um erro na operação.</div>';
+}
+?>
   <div class="container">
     <div class="row">
       <div class="col">

@@ -10,28 +10,8 @@ $data_nascimento = $_POST["data_nascimento"];
 
 $cliente = new Cliente($conn);
 if ($cliente->Salvar($nome, $endereco, $telefone, $email, $data_nascimento)) {
-  mensagem("$nome cadastrado com sucesso!", 'success');
+  header ("Location: ../views/pesquisar.php?mensagem=successo_cadastro");
 } else {
-  mensagem("$nome não foi cadastrado!", 'danger');
+  header ("Location: ../views/pesquisar.php?mensagem=erro_cadastro");
 }
 ?>
-
-<!doctype html>
-<html lang="pt-br">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="../public/css/bootstrap.min.css">
-</head>
-
-<body>
-  <div class="container">
-    <div class="row">
-      <a href="../public/index.php" class="btn btn-primary">Voltar</a>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>

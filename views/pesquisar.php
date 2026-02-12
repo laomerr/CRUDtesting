@@ -86,7 +86,7 @@ $dados = $cliente->pesquisar($pesquisa);
                         <p>Deseja realmente excluir este registro?</p>
                         <p id="nome_pessoa" style="font-weight: bold;">Nome da Pessoa</p>
 
-                        <input type="hidden" name="cod_pessoa" id="cod_pessoa_input" value="">
+                        <input type="hidden" name="id" id="cod_pessoa_input" value="">
 
                         <input type="hidden" name="nome" id="nome_pessoa_input" value="">
 
