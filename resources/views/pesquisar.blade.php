@@ -10,6 +10,17 @@
 
 <body>
     <div class="container mt-5">
+        @if (session('msg'))
+            @if (session('msg') == 'sucesso_atualizar')
+                <div class="alert alert-success">
+                    as informações foram alteradas com sucesso
+                </div>
+            @elseif (session('msg') == 'sucesso_excluir')
+                <div class="alert alert-success">
+                    a pessoa foi excluida com sucesso
+                </div>
+            @endif
+        @endif
         <h1>Pesquisar Empresas</h1>
         <nav class="navbar bg-light mb-3">
             <div class="container-fluid">

@@ -13,5 +13,3 @@ Route::get('/pesquisar', [App\Http\Controllers\EmpresaController::class, 'index'
 Route::get('/empresas/editar/{id}', [EmpresaController::class, 'edit'])->name('editar.edit');
 Route::put('/empresas/atualizar/{id}', [EmpresaController::class, 'update'])->name('atualizar.update');
 Route::delete('/excluir', [EmpresaController::class, 'destroy'])->name('excluir.destroy');
-
-
