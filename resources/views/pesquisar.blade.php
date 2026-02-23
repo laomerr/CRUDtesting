@@ -44,7 +44,7 @@
             <tbody>
                 @if (isset($empresas) && count($empresas) > 0)
                     @foreach ($empresas as $linha)
-                        <tr>
+                        <tr id="linha-{{ $linha->cod_pessoa }}">
                             <td>{{ $linha->nome }}</td>
                             <td>{{ $linha->endereco }}</td>
                             <td>{{ $linha->telefone }}</td>
@@ -69,10 +69,11 @@
         </table>
         <a href="/home" class="btn btn-secondary">Voltar</a>
     </div>
+
     <div class="modal fade" id="exampleModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="{{ route('excluir.destroy') }}" method="POST">
+                <form id="formExcluir" action="{{ route('excluir.destroy') }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <div class="modal-body">
@@ -88,32 +89,14 @@
         </div>
     </div>
 
-    <script>
-        function pegar_dados(id, nome) {
-            document.getElementById('nome_pessoa').innerHTML = nome;
-            document.getElementById('cod_pessoa_input').value = id;
-        }
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        const inputBusca = document.querySelector('input[name="busca"]');
-        const corpoTabela = document.querySelector('tbody');
-
-        inputBusca.addEventListener('keyup', function() {
-            const valorBusca = this.value;
-
-            fetch(`{{ route('pesquisar') }}?busca=${valorBusca}`, {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                })
-                .then(response => response.text())
-                .then(html => {
-                    corpoTabela.innerHTML = html;
-                })
-                .catch(error => console.warn('Erro na busca:', error));
-        });
+        const urlPesquisar = "{{ route('pesquisar') }}";
+        const urlExcluir = "{{ route('excluir.destroy') }}";
     </script>
+
+    <script src="{{ asset('js/pesquisar.js') }}"></script>
 </body>
 
 </html>

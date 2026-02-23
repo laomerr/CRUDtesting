@@ -15,6 +15,9 @@ class EmpresaController extends Controller
     {
         $dados = $request->all();
         Empresa::create($dados);
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
         return redirect()->route('home.index')->with('msg', 'sucesso_cadastro');
     }
 
@@ -40,14 +43,21 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::findOrFail($id);
         $empresa->update($request->all());
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
         return redirect()->route('pesquisar')->with('msg', 'sucesso_atualizar');
     }
 
     public function destroy(Request $request)
     {
         $id = $request->input('id');
-        $pessoa = empresa::findOrFail($id);
+        $pessoa = Empresa::findOrFail($id);
         $pessoa->delete();
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
         return redirect()->route('pesquisar')->with('msg', 'sucesso_excluir');
     }
 }
