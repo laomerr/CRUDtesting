@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'seguranca' => \App\Http\Middleware\ProtecaoSimples::class
+            'seguranca' => \App\Http\Middleware\ProtecaoSimples::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

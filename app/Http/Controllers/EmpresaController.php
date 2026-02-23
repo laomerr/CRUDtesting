@@ -43,7 +43,6 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::findOrFail($id);
         $empresa->update($request->all());
-
         if ($request->ajax()) {
             return response()->json(['success' => true]);
         }

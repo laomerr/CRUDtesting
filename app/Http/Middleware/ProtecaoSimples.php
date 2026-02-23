@@ -5,18 +5,16 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log; // Importante para o Log
 
 class ProtecaoSimples
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
-        if ($request->has('bloquear')) {
-            return redirect('/home')->with('msg', 'Acesso negado pela segurança!');
+        Log::info('Acesso à rota: ' . $request->url());
+
+        if ($request->has('bloqueado')) {
+            return redirect('/home')->with('msg', 'Acesso negado pelo Middleware!');
         }
 
         return $next($request);
